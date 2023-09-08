@@ -5,4 +5,6 @@ import co.gestor.Inventario.modelo.Producto;
 
 public interface IService {
     Producto guardarProducto(ProductoDTO productoDTO);
+
+    Producto actualizarProducto(ProductoDTO productoDTO);
 }
