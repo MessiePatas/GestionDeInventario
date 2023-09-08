@@ -37,6 +37,7 @@ public class ProductoController {
             return ResponseEntity.badRequest().body(new RespuestaDTO("No se pudo actualizar el producto: " + e.getMessage()));
         }
     }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<RespuestaDTO> eliminarProducto(@PathVariable int id) {
         ProductoDTO productoDTO = new ProductoDTO();
@@ -50,9 +51,6 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
 
 
 }
