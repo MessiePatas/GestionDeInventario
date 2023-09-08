@@ -6,6 +6,9 @@ import co.gestor.Inventario.repository.ProductoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class ProductoLogica implements IService {
@@ -22,6 +25,25 @@ public class ProductoLogica implements IService {
         productoRepository.save(productoBD);
 
         return productoBD;
+    }
+
+    @Transactional
+    public Producto actualizarProducto(ProductoDTO productoDTO) {
+        Optional<Producto> productoOptional = productoRepository.findById(productoDTO.getId());
+
+        if (productoOptional.isPresent()) {
+            Producto productoExistente = productoOptional.get();
+
+
+            productoExistente.setNombre(productoDTO.getNombre());
+
+
+            Producto productoActualizado = productoRepository.save(productoExistente);
+
+            return productoActualizado;
+        } else {
+            return null;
+        }
     }
 
 
