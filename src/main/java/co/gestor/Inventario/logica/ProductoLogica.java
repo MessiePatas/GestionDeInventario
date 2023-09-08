@@ -58,4 +58,16 @@ public class ProductoLogica implements IService {
         }
     }
 
+    public Producto eliminarProducto(ProductoDTO productoDTO) {
+        Optional<Producto> productoOptional = productoRepository.findById(productoDTO.getId());
+
+        if (productoOptional.isPresent()) {
+            Producto productoExistente = productoOptional.get();
+            productoRepository.delete(productoExistente);
+            return productoExistente;
+        } else {
+            return null;
+        }
+    }
+
 }

@@ -8,4 +8,5 @@ public interface IService {
 
     Producto actualizarProducto(ProductoDTO productoDTO);
 
+    Producto eliminarProducto(ProductoDTO productoDTO);
 }
