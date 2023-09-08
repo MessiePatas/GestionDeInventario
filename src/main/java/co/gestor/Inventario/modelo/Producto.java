@@ -18,6 +18,14 @@ public class Producto {
     private int id;
     @Column
     private String nombre;
+    @Column
+    private String descripcion;
+    @Column
+    private int precio;
+    @Column
+    private int cantidad;
+    @Column
+    private String categoria;
 
 
 }
