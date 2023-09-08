@@ -38,4 +38,19 @@ public class ProductoController {
         }
     }
 
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<RespuestaDTO> eliminarProducto(@PathVariable int id) {
+        ProductoDTO productoDTO = new ProductoDTO();
+        productoDTO.setId(id);
+
+        Producto productoEliminado = productoLogica.eliminarProducto(productoDTO);
+
+        if (productoEliminado != null) {
+            return ResponseEntity.ok(new RespuestaDTO("Producto eliminado correctamente"));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }
