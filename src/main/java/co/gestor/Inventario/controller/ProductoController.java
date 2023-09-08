@@ -19,7 +19,7 @@ public class ProductoController {
 
     @PostMapping("/agregar")
     public ResponseEntity<RespuestaDTO> guardarProducto(@RequestBody ProductoDTO productoDTO) {
-
+        productoLogica.guardarProducto(productoDTO);
         return ResponseEntity.ok(new RespuestaDTO("Producto guardado correctamente"));
     }
 

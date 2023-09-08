@@ -5,6 +5,8 @@ import co.gestor.Inventario.modelo.Producto;
 import co.gestor.Inventario.repository.ProductoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -22,6 +24,11 @@ public class ProductoLogica implements IService {
         Producto productoBD = new Producto();
         productoBD.setId(productoDTO.getId());
         productoBD.setNombre(productoDTO.getNombre());
+        productoBD.setDescripcion(productoDTO.getDescripcion());
+        productoBD.setPrecio(productoDTO.getPrecio());
+        productoBD.setCantidad(productoDTO.getCantidad());
+        productoBD.setCategoria(productoDTO.getCategoria());
+
         productoRepository.save(productoBD);
 
         return productoBD;
@@ -34,8 +41,13 @@ public class ProductoLogica implements IService {
         if (productoOptional.isPresent()) {
             Producto productoExistente = productoOptional.get();
 
-
+            productoExistente.setId(productoDTO.getId());
             productoExistente.setNombre(productoDTO.getNombre());
+            productoExistente.setDescripcion(productoDTO.getDescripcion());
+            productoExistente.setCategoria(productoDTO.getCategoria());
+            productoExistente.setPrecio(productoDTO.getPrecio());
+            productoExistente.setCantidad(productoDTO.getCantidad());
+            productoExistente.setCategoria(productoDTO.getCategoria());
 
 
             Producto productoActualizado = productoRepository.save(productoExistente);
@@ -45,6 +57,5 @@ public class ProductoLogica implements IService {
             return null;
         }
     }
-
 
 }
