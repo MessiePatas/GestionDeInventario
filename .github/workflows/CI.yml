@@ -1,5 +1,4 @@
-name: Continuous Integration
-
+name: Integración continua
 on:
   pull_request:
     branches: ["master"]
@@ -12,18 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Java
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - name: Instalando javita
+        uses: actions/setup-java@v2
         with:
-          java-version: '17'
-
-      - name: Make gradlew executable
-        run: |
-          chmod +x ./gradlew
-
-      - name: Build project
-        run: |
-          ./gradlew build
+            distribution: 'temurin'
+            java-version: '17'
+      - name: Compilando mi proyecto <3
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
+        with:
+          arguments: build
