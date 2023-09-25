@@ -15,7 +15,7 @@ jobs:
       - name: Instalando javita
         uses: actions/setup-java@v3
         with:
-            distribution: 'temurin'
+            distribution: 'oracle'
             java-version: '17'
       - name: Compilando mi proyecto <3
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
