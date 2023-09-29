@@ -25,32 +25,26 @@ public class ProductoControllerTest {
 
     @Test
     void guardarProductoDeberiaRetornarRespuestaExitosa() {
-        // Arrange
         ProductoDTO productoDTO = new ProductoDTO();
         productoDTO.setNombre("Producto de prueba");
         Mockito.when(productoLogica.guardarProducto(productoDTO)).thenReturn(new Producto());
 
-        // Act
         ResponseEntity<RespuestaDTO> respuesta = productoController.guardarProducto(productoDTO);
 
-        // Assert
         assertEquals(HttpStatus.OK, respuesta.getStatusCode());
         assertEquals("Producto guardado correctamente", respuesta.getBody().getMensaje());
     }
 
     @Test
     void actualizarProductoDeberiaRetornarRespuestaExitosa() {
-        // Arrange
         int id = 1;
         ProductoDTO productoDTO = new ProductoDTO();
         productoDTO.setId(id);
         productoDTO.setNombre("Producto actualizado de prueba");
         Mockito.when(productoLogica.actualizarProducto(productoDTO)).thenReturn(new Producto());
 
-        // Act
         ResponseEntity<RespuestaDTO> respuesta = productoController.actualizarProducto(id, productoDTO);
 
-        // Assert
         assertEquals(HttpStatus.OK, respuesta.getStatusCode());
         assertEquals("Producto actualizado correctamente", respuesta.getBody().getMensaje());
     }
