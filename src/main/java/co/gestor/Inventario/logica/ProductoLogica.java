@@ -16,9 +16,7 @@ public class ProductoLogica implements IService {
     private final ProductoRepository productoRepository;
 
     public Producto guardarProducto(ProductoDTO productoDTO) {
-        if ("papel".equals(productoDTO.getNombre())) {
-            throw new IllegalArgumentException("Esto no es una papeleria");
-        }
+
         Producto productoBD = new Producto();
         productoBD.setId(productoDTO.getId());
         productoBD.setNombre(productoDTO.getNombre());
