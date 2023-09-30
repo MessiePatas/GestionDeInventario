@@ -5,8 +5,6 @@ import co.gestor.Inventario.modelo.Producto;
 import co.gestor.Inventario.repository.ProductoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
