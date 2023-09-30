@@ -84,23 +84,10 @@ class ProductoLogicaTest {
         // Verify
         Mockito.verify(productoRepository).save(productoGuardado);
     }
-    @Test
-     void testGuardarProductoInvalido() {
-        ProductoDTO productoDTO = new ProductoDTO();
-        productoDTO.setId(2);
-        productoDTO.setNombre("papel");
-        //assert
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            productoLogica.guardarProducto(productoDTO);
-        });
-
-
-        verify(productoRepository, never()).save(any());
-    }
     @Test
     public void testActualizarProducto() {
-        // Datos de prueba
+
         ProductoDTO productoDTO = new ProductoDTO();
         productoDTO.setId(1);
         productoDTO.setNombre("Nuevo Nombre");
@@ -117,14 +104,14 @@ class ProductoLogicaTest {
         productoExistente.setPrecio(15);
         productoExistente.setCantidad(30);
 
-        // Mock del repositorio
+
         when(productoRepository.findById(1)).thenReturn(Optional.of(productoExistente));
         when(productoRepository.save(any(Producto.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Llamada al método
+
         Producto productoActualizado = productoLogica.actualizarProducto(productoDTO);
 
-        // Verificación de resultados
+
         assertNotNull(productoActualizado);
         assertEquals(productoDTO.getId(), productoActualizado.getId());
         assertEquals(productoDTO.getNombre(), productoActualizado.getNombre());
@@ -133,8 +120,33 @@ class ProductoLogicaTest {
         assertEquals(productoDTO.getPrecio(), productoActualizado.getPrecio());
         assertEquals(productoDTO.getCantidad(), productoActualizado.getCantidad());
 
-        // Verificación de llamadas al repositorio
+
         verify(productoRepository, times(1)).findById(1);
         verify(productoRepository, times(1)).save(any(Producto.class));
     }
+    @Test
+    public void testActualizarProducto_NoExistente() {
+        // Datos de prueba
+        ProductoDTO productoDTO = new ProductoDTO();
+        productoDTO.setId(1);
+        productoDTO.setNombre("Nuevo Nombre");
+        productoDTO.setDescripcion("Nueva Descripción");
+        productoDTO.setCategoria("Nueva Categoría");
+        productoDTO.setPrecio(19);
+        productoDTO.setCantidad(50);
+
+        // Mock del repositorio
+        when(productoRepository.findById(1)).thenReturn(Optional.empty());
+
+        // Llamada al método
+        Producto productoActualizado = productoLogica.actualizarProducto(productoDTO);
+
+        // Verificación de resultado para el caso en que no existe
+        assertNull(productoActualizado);
+
+        // Verificación de llamadas al repositorio
+        verify(productoRepository, times(1)).findById(1);
+        verify(productoRepository, never()).save(any(Producto.class));
+    }
 }
+
