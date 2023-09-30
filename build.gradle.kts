@@ -46,17 +46,16 @@ jacoco {
 	toolVersion = "0.8.8"
 }
 
-tasks.test {
-	finalizedBy(tasks.jacocoTestReport)
-}
-tasks.jacocoTestReport {
-	dependsOn(tasks.test)
-}
 
-tasks.jacocoTestReport {
-	reports {
-		xml.required.set(false)
-		csv.required.set(false)
-		html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+afterEvaluate{
+	tasks.named<JacocoReport>("jacocoTestReport"){
+		classDirectories.setFrom(classDirectories.files.map { dir ->
+			fileTree(dir){
+				exclude(
+						"co/gestor/Inventario/controller/DTO",
+						"co/gestor/Inventario/modelo"
+				)
+			}
+		})
 	}
 }
