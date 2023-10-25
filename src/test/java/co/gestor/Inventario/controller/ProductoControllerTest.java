@@ -2,35 +2,32 @@ package co.gestor.Inventario.controller;
 
 import co.gestor.Inventario.controller.DTO.ProductoDTO;
 import co.gestor.Inventario.controller.DTO.RespuestaDTO;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpEntity;
 
-import java.util.ResourceBundle;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(profiles = "sa")
-
 class ProductoControllerTest {
     @Autowired
     TestRestTemplate rest;
     @LocalServerPort
     private int randomServerPort;
+
     @Test
     void guardarProducto() {
 
@@ -72,7 +69,7 @@ class ProductoControllerTest {
 
         try {
             // Construir la URL base dinámicamente usando el puerto aleatorio
-            String BASE_URL = "http://localhost:" + randomServerPort ;
+            String BASE_URL = "http://localhost:" + randomServerPort;
             String fullUrl = BASE_URL + url;
 
             // Realizar la solicitud DELETE con exchange
