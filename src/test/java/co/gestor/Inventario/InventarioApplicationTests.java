@@ -6,6 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles(profiles = "sa")
 @SpringBootTest
+@ActiveProfiles(profiles = "ewrzzsxdghfgcbv")
 class InventarioApplicationTests {
 
 	@Test
