@@ -27,7 +27,8 @@ dependencies {
 	compileOnly("org.projectlombok:lombok:1.18.28")
 	annotationProcessor("org.projectlombok:lombok:1.18.28")
 	implementation("com.h2database:h2:2.2.220")
-	testImplementation("com.h2database:h2:1.4.200")
+	testImplementation("com.h2database:h2:2.2.224")
+
 }
 
 tasks.withType<Test> {

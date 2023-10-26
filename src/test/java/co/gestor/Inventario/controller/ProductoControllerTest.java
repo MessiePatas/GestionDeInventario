@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles(profiles = "sa")
+@ActiveProfiles(profiles = "ewrzzsxdghfgcbv")
 class ProductoControllerTest {
     @Autowired
     TestRestTemplate rest;
