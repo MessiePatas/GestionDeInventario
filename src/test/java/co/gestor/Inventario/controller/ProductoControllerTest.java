@@ -18,10 +18,11 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles(profiles = "ewrzzsxdghfgcbv")
+@ActiveProfiles(profiles = "sa")
 class ProductoControllerTest {
     @Autowired
     TestRestTemplate rest;
@@ -37,10 +38,10 @@ class ProductoControllerTest {
 
     }
 
-   /* @Test
+    @Test
     void actualizarProducto() {
 
-        ProductoDTO dto = new ProductoDTO(11, "celular", "usado", 442, 66, "barato");
+        ProductoDTO dto = new ProductoDTO(14, "celular", "usado", 442, 66, "barato");
         ResponseEntity<RespuestaDTO> respuesta = rest.exchange(
                 "/api/producto/actualizar/{id}",
                 HttpMethod.PUT,
@@ -55,7 +56,9 @@ class ProductoControllerTest {
         assertEquals("Producto actualizado correctamente", respuesta.getBody().getMensaje());
 
 
-    }*/
+    }
+
+
 
 
     @Test
