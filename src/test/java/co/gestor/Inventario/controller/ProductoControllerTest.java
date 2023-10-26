@@ -40,8 +40,11 @@ class ProductoControllerTest {
 
     @Test
     void actualizarProducto() {
+        /*ProductoDTO dto = new ProductoDTO(11,"celular","usado",442,66,"barato");
+        ResponseEntity<RespuestaDTO> respuesta = rest.postForEntity("/api/producto/actualizar/{id}",dto, RespuestaDTO.class);
+        assertEquals("Producto actualizado correctamente", respuesta.getBody().getMensaje());*/
 
-        ProductoDTO dto = new ProductoDTO(14, "celular", "usado", 442, 66, "barato");
+        ProductoDTO dto = new ProductoDTO(11, "celular", "usado", 442, 66, "barato");
         ResponseEntity<RespuestaDTO> respuesta = rest.exchange(
                 "/api/producto/actualizar/{id}",
                 HttpMethod.PUT,
@@ -50,9 +53,7 @@ class ProductoControllerTest {
                 dto.getId()
         );
 
-// Verificación de la respuesta y su cuerpo
-        assertNotNull(respuesta, "La respuesta no debería ser nula");
-        assertNotNull(respuesta.getBody(), "El cuerpo de la respuesta no debería ser nulo");
+
         assertEquals("Producto actualizado correctamente", respuesta.getBody().getMensaje());
 
 
