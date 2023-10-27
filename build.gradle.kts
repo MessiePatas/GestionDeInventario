@@ -3,6 +3,7 @@ plugins {
 	id("org.springframework.boot") version "2.7.15"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	jacoco
+	id("info.solidsoft.pitest")version "1.9.0"
 }
 
 group = "co.gestor"
@@ -60,5 +61,13 @@ afterEvaluate{
 				)
 			}
 		})
+	}
+
+	pitest{
+		junit5PluginVersion.set("1.0.0")
+		excludedClasses.addAll("co/gestor/Inventario/controller/DTO.**",
+		"co/gestor/Inventario/modelo.**")
+
+
 	}
 }
