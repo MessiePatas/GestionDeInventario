@@ -29,6 +29,8 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok:1.18.28")
 	implementation("com.h2database:h2:2.2.220")
 	testImplementation("com.h2database:h2:2.2.224")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 
 }
 
