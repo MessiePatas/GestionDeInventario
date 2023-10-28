@@ -1,16 +1,18 @@
-version: '3'
+version: '1'
 
 services:
   api:
+    container_name: inventario_api
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8088:8088"
+      - "8088:8089"
     depends_on:
       - db
 
   db:
+    container_name: inventario_db
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: inventario_db
