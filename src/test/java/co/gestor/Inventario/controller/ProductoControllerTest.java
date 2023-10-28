@@ -35,51 +35,30 @@ class ProductoControllerTest {
 
     }
 
-   /* @Test
+    @Test
     void actualizarProducto() {
-        ProductoDTO dto = new ProductoDTO(11,"celular","usado",442,66,"barato");
+        /*ProductoDTO dto = new ProductoDTO(11,"celular","usado",442,66,"barato");
         ResponseEntity<RespuestaDTO> respuesta = rest.postForEntity("/api/producto/actualizar/{id}",dto, RespuestaDTO.class);
-        assertEquals("Producto actualizado correctamente", respuesta.getBody().getMensaje());
+        assertEquals("Producto actualizado correctamente", respuesta.getBody().getMensaje());*/
 
-        ProductoDTO dto = new ProductoDTO(14, "celular", "usado", 442, 66, "barato");
+        ProductoDTO dto = new ProductoDTO(11, "celular", "usado", 442, 66, "barato");
         ResponseEntity<RespuestaDTO> respuesta = rest.exchange(
-                "/api/producto/actualizar/14",
+                "/api/producto/actualizar/{id}",
                 HttpMethod.PUT,
-                null,
+                new HttpEntity<>(dto),
                 RespuestaDTO.class,
                 dto.getId()
         );
 
 
-        assertEquals("No se pudo actualizar el producto:.", respuesta.getBody().getMensaje());
+        assertEquals("Producto actualizado correctamente", respuesta.getBody().getMensaje());
 
 
     }
-*/
 
-   /* @Test
-    public void testActualizarProducto() {
-        int id = 1; // Puedes modificar esto con un ID real si es necesario
-        ProductoDTO productoDTO = new ProductoDTO();
-        productoDTO.setNombre("NuevoNombre"); // Establece los campos requeridos del DTO
-        // ... otros campos del ProductoDTO ...
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/json");
 
-        HttpEntity<ProductoDTO> requestEntity = new HttpEntity<>(productoDTO, headers);
 
-        ResponseEntity<RespuestaDTO> response = rest.exchange(
-                "http://localhost:" + randomServerPort + "/api/producto/actualizar/1" ,
-                HttpMethod.PUT,
-                requestEntity,
-                RespuestaDTO.class
-        );
-
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals("Producto actualizado correctamente", response.getBody().getMensaje());
-    }
-*/
     @Test
     public void testEliminarProducto() {
         // ID del producto a eliminar

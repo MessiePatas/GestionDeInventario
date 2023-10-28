@@ -1,7 +1,8 @@
-version: '3'
+version: '1'
 
 services:
   api:
+    container_name: inventario_api
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,6 +12,7 @@ services:
       - db
 
   db:
+    container_name: inventario_db
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: inventario_db
