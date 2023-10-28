@@ -1,4 +1,5 @@
-FROM ubuntu:latest
-LABEL authors="santiagobarrera"
+FROM eclipse-temurin
 
-ENTRYPOINT ["top", "-b"]
+COPY /build/libs/Inventario-0.0.1-SNAPSHOT.jar .
+
+CMD ["java", "-jar", "Inventario-0.0.1-SNAPSHOT.jar"]
