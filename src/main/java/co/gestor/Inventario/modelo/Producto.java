@@ -1,7 +1,6 @@
 package co.gestor.Inventario.modelo;
 
 import lombok.Data;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,6 +17,14 @@ public class Producto {
     private int id;
     @Column
     private String nombre;
+    @Column
+    private String descripcion;
+    @Column
+    private int precio;
+    @Column
+    private int cantidad;
+    @Column
+    private String categoria;
 
 
 }
