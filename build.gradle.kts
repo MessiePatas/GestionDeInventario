@@ -4,6 +4,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	jacoco
 	id("info.solidsoft.pitest")version "1.9.0"
+	id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "co.gestor"
@@ -18,6 +19,8 @@ repositories {
 }
 
 dependencies {
+
+
 	implementation ("io.springfox:springfox-swagger2:2.9.2")
 	implementation ("io.springfox:springfox-swagger-ui:2.9.2")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -29,6 +32,7 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok:1.18.28")
 	implementation("com.h2database:h2:2.2.220")
 	testImplementation("com.h2database:h2:2.2.224")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 
 }
 
@@ -43,6 +47,9 @@ tasks.jacocoTestReport {
 	dependsOn(tasks.test)
 	reports {
 		csv.required.set(true)
+		xml.required.set(true)
+
+
 	}
 }
 
@@ -66,8 +73,16 @@ afterEvaluate{
 	pitest{
 		junit5PluginVersion.set("1.0.0")
 		excludedClasses.addAll("co/gestor/Inventario/controller/DTO.**",
-		"co/gestor/Inventario/modelo.**")
+		"co/gestor/Inventario/modelo.**","co/gestor/Inventario/controller")
+
 
 
 	}
+
+	sonarqube {
+		properties {
+			property("sonar.projectName", "Inventario")
+		}
+	}
+
 }

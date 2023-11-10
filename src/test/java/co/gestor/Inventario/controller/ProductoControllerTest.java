@@ -39,9 +39,9 @@ class ProductoControllerTest {
     void actualizarProducto() {
 
 
-        ProductoDTO dto = new ProductoDTO(14, "celular", "usado", 442, 66, "barato");
+        ProductoDTO dto = new ProductoDTO(1, "celular", "usado", 442, 66, "barato");
         ResponseEntity<RespuestaDTO> respuesta = rest.exchange(
-                "/api/producto/actualizar/14",
+                "/api/producto/actualizar/1",
                 HttpMethod.PUT,
                 new HttpEntity<>(dto),
                 RespuestaDTO.class,
@@ -53,8 +53,8 @@ class ProductoControllerTest {
 
 
     }
+*/
 
-     */
     @Test
     public void testEliminarProducto() {
         // ID del producto a eliminar
