@@ -32,16 +32,15 @@ class ProductoControllerTest {
         ProductoDTO dto = new ProductoDTO(14, "rollos", "nuevo", 452, 56, "caro");
         ResponseEntity<RespuestaDTO> respuesta = rest.postForEntity("/api/producto/agregar", dto, RespuestaDTO.class);
         assertEquals("Producto guardado correctamente", respuesta.getBody().getMensaje());
-
     }
 
-    /*@Test
+    @Test
     void actualizarProducto() {
+        ProductoDTO dto = new ProductoDTO(21, "rollos", "nuevo", 452, 56, "caro");
+        rest.postForEntity("/api/producto/agregar", dto, RespuestaDTO.class);
 
-
-        ProductoDTO dto = new ProductoDTO(1, "celular", "usado", 442, 66, "barato");
         ResponseEntity<RespuestaDTO> respuesta = rest.exchange(
-                "/api/producto/actualizar/1",
+                "/api/producto/actualizar/21",
                 HttpMethod.PUT,
                 new HttpEntity<>(dto),
                 RespuestaDTO.class,
@@ -53,7 +52,7 @@ class ProductoControllerTest {
 
 
     }
-*/
+
 
     @Test
     public void testEliminarProducto() {
