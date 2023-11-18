@@ -30,6 +30,12 @@ dependencies {
 	implementation("com.h2database:h2:2.2.220")
 	testImplementation("com.h2database:h2:2.2.224")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
+	implementation("org.webjars:bootstrap:5.3.2")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.1.5")
+	implementation("org.thymeleaf:thymeleaf-spring5:3.1.2.RELEASE")
+
+
 
 
 }
