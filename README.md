@@ -25,3 +25,17 @@ Para ejecutar nuestro proyecto, es necesario seguir estos pasos:
   - Revisar la informacion en la base de datos
 
 Ahora que conoces los pasos para ejecutar el proyecto, estás listo para comenzar.
+
+## Cómo levantar la API con HTTPS
+Para habilitar HTTPS en tu API, sigue estos pasos:
+
+Generar Certificado: Ejecuta el siguiente comando para crear un certificado auto-firmado:
+>keytool -genkeypair -alias myalias -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650
+
+Guarda el archivo keystore.p12 y la contraseña que ingreses.
+
+Configuración de Spring Boot: Agrega las configuraciones SSL en application.properties y coloca keystore.p12 en src/main/resources.
+
+Docker: Asegúrate de que tu Dockerfile copie el keystore.p12 al contenedor.
+
+Levantar API: Despliega la aplicación como de costumbre. Ahora debería estar accesible con HTTPS.

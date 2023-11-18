@@ -1,0 +1,25 @@
+
+[type=search] {
+    border-radius: 5px;
+    padding:3px 10px;
+    border:1px solid;
+    background-color:#f6f6f6;
+    margin:8px 0;
+}
+
+[name=listTable_length] {
+    border-radius: 5px;
+    border:1px solid;
+    padding:3px 10px;
+    background-color:#f6f6f6;
+    margin:8px 0;
+}
+
+.table td {
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+
+.table {
+    width: 100%!important;
+}

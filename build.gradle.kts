@@ -5,6 +5,7 @@ plugins {
 	jacoco
 	id("info.solidsoft.pitest")version "1.9.0"
 	id("org.sonarqube") version "4.4.1.3373"
+
 }
 
 group = "co.gestor"
@@ -33,6 +34,13 @@ dependencies {
 	implementation("com.h2database:h2:2.2.220")
 	testImplementation("com.h2database:h2:2.2.224")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
+	implementation("org.webjars:bootstrap:5.3.2")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.1.5")
+	implementation("org.thymeleaf:thymeleaf-spring5:3.1.2.RELEASE")
+
+
+
 
 }
 
@@ -73,6 +81,7 @@ afterEvaluate{
 	pitest{
 		junit5PluginVersion.set("1.0.0")
 		excludedClasses.addAll("co/gestor/Inventario/controller/DTO.**",
+
 		"co/gestor/Inventario/modelo.**","co/gestor/Inventario/controller")
 
 
@@ -83,6 +92,12 @@ afterEvaluate{
 		properties {
 			property("sonar.projectName", "Inventario")
 		}
+	}
+
+
+		"co/gestor/Inventario/modelo.**")
+
+
 	}
 
 }
