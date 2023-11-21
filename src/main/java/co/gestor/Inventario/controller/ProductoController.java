@@ -7,6 +7,8 @@ import co.gestor.Inventario.modelo.Producto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/producto")
 public class ProductoController {
@@ -17,9 +19,16 @@ public class ProductoController {
         this.productoLogica = productoLogica;
     }
 
+    @GetMapping("/listar")
+    public ResponseEntity<List<ProductoDTO>> mostrarProductos() {
+        List<ProductoDTO> listProductos = productoLogica.listarProductos();
+        return ResponseEntity.ok().body(listProductos);
+    }
     @PostMapping("/agregar")
     public ResponseEntity<RespuestaDTO> guardarProducto(@RequestBody ProductoDTO productoDTO) {
         productoLogica.guardarProducto(productoDTO);
+
+
         return ResponseEntity.ok(new RespuestaDTO("Producto guardado correctamente"));
     }
 

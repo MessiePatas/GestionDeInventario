@@ -352,7 +352,7 @@ CREATE TABLE `users_table` ( `id` int , `nombre` varchar(100) DEFAULT NULL, `des
 	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261) ~[spring-jdbc-5.3.29.jar:5.3.29]
 	... 115 common frames omitted
 
-2023-11-10 15:13:14.133 ERROR 13552 --- [Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@57e388c3] to prepare test instance [co.gestor.Inventario.controller.ProductoControllerTest@1526f71]
+2023-11-10 15:13:14.133 ERROR 13552 --- [Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@57e388c3] to prepare test instance [controller.CO.GESTOR.INVENTARIO.ProductoControllerTest@1526f71]
 
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:98) ~[spring-test-5.3.29.jar:5.3.29]
@@ -863,7 +863,7 @@ CREATE TABLE `users_table` ( `id` int , `nombre` varchar(100) DEFAULT NULL, `des
 	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261) ~[spring-jdbc-5.3.29.jar:5.3.29]
 	... 115 common frames omitted
 
-2023-11-10 15:14:17.943 ERROR 10696 --- [Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@57e388c3] to prepare test instance [co.gestor.Inventario.controller.ProductoControllerTest@1526f71]
+2023-11-10 15:14:17.943 ERROR 10696 --- [Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@57e388c3] to prepare test instance [controller.CO.GESTOR.INVENTARIO.ProductoControllerTest@1526f71]
 
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:98) ~[spring-test-5.3.29.jar:5.3.29]
@@ -1372,7 +1372,7 @@ CREATE TABLE `users_table` ( `id` int , `nombre` varchar(100) DEFAULT NULL, `des
 	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261) ~[spring-jdbc-5.3.29.jar:5.3.29]
 	... 115 common frames omitted
 
-2023-11-10 15:21:26.964 ERROR 18364 --- [Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@57e388c3] to prepare test instance [co.gestor.Inventario.controller.ProductoControllerTest@1526f71]
+2023-11-10 15:21:26.964 ERROR 18364 --- [Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@57e388c3] to prepare test instance [controller.CO.GESTOR.INVENTARIO.ProductoControllerTest@1526f71]
 
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:98) ~[spring-test-5.3.29.jar:5.3.29]

@@ -1,5 +1,6 @@
 package co.gestor.Inventario.modelo;
 
+import lombok.Builder;
 import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;

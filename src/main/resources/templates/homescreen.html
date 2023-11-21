@@ -29,6 +29,7 @@
 </head>
 <body>
 <div class="container-fluid h-100">
+    <form class="form-inline" th:action="@{/api/productos/}">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center w-100">
@@ -37,6 +38,7 @@
             </div>
         </div>
     </nav>
+    </form>
     <div class="row h-100" style="margin-top: 1cm;">
         <div class="col-md-9 table-container">
             <h4>Lista de Productos</h4>
@@ -52,6 +54,22 @@
                 </tr>
                 </thead>
                 <tbody>
+                <th:block th:each="producto : ${listProductos}">
+                    <tr>
+                        <td>[[${producto.id}]]</td>
+                        <td>[[${producto.nombre}]]</td>
+                        <td>[[${producto.descripcion}]]</td>
+                        <td>[[${producto.precio}]]</td>
+                        <td>[[${producto.cantidad}]]</td>
+                        <td>[[${producto.categoria}]]</td>
+                        <td>
+                            <a th:href="@{'/api/producto/actualizar/' + ${producto.id}}">Edit</a>
+
+                            <a th:href="@{'/api/producto/eliminar/' + ${producto.id}}">Delete</a>
+                        </td>
+
+                    </tr>
+                </th:block>
                 <!-- Aquí se mostrarán los productos -->
                 </tbody>
             </table>
