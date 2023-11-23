@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inventario</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        html, body {
+            height: 100%;
+            margin-top: 10px; /* Espacio de 1 cm (aprox.) */
+        }
+        .sidebar {
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+        .table-container {
+            overflow-y: auto;
+            height: 70vh;
+        }
+    </style>
+    <script th:inline="javascript">
+        function updateProduct() {
+            var productId = document.getElementById('id').value;
+            var updatedData = {
+                // Collect updated data from your form fields
+                nombre: document.getElementById('nombre').value,
+                descripcion: document.getElementById('descripcion').value,
+                precio: document.getElementById('precio').value,
+                cantidad: document.getElementById('cantidad').value,
+                categoria: document.getElementById('categoria').value
+            };
+
+            fetch('http://localhost:8088/api/producto/actualizar/' + productId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    // Redirect to /api/producto/listar on success
+                    window.location.href = 'http://localhost:8088/api/producto/listar';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Display an error message to the user, e.g., using an alert
+                    alert('Error updating product. Please try again.');
+                });
+        }
+        function deleteProduct(productId) {
+            fetch('http://localhost:8088/api/producto/eliminar/' + productId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    // Redirect or perform other actions on success
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Display an error message to the user
+                    alert('Error deleting product. Please try again.');
+                });
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/035d968a56.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid h-100">
+    <form class="form-inline" th:action="@{http://localhost:8088/inicio/}">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a class="navbar-brand" href="#">Gestion de Inventario</a>
+                <a class="nav-link" href="/logout" style="margin-right: 5px;">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+    </form>
+    <div class="row h-100" style="margin-top: 1cm;">
+        <div class="col-md-9 table-container">
+            <h4>Lista de Productos</h4>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Categoria</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="producto : ${productoList}">
+                    <tr>
+                        <td>[[${producto.id}]]</td>
+                        <td>[[${producto.nombre}]]</td>
+                        <td>[[${producto.descripcion}]]</td>
+                        <td>[[${producto.precio}]]</td>
+                        <td>[[${producto.cantidad}]]</td>
+                        <td>[[${producto.categoria}]]</td>
+                        <td>
+                            <button class="btn btn-secondary mb-2" th:href="@{'http://localhost:8088/api/producto/editar/' + ${producto.id}}">Edit</button>
+                            <button class="btn btn-danger mb-2" th:href="@{'http://localhost:8088/api/producto/eliminar/' + ${producto.id}}" th:method="delete">Delete</button>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3 sidebar">
+            <h4>Detalles del Producto</h4>
+            <form th:onsubmit="updateProduct()" th:object="${producto}">
+            <div class="mb-3">
+                <label for="id">ID</label>
+                <input type="text" th:value="*{id}" id="id" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="nombre">Nombre</label>
+                <input type="text" th:value="*{nombre}" id="nombre" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="descripcion">Descripción</label>
+                <input type="text" th:value="*{descripcion}" id="descripcion" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="precio">Precio</label>
+                <input type="text" th:value="*{precio}" id="precio" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="cantidad">Cantidad</label>
+                <input type="text" th:value="*{cantidad}" id="cantidad" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="categoria">Categoria</label>
+                <input type="text" th:value="*{categoria}" id="categoria" class="form-control">
+            </div>
+            <button class="btn btn-primary mb-2"  type="submit" >
+                Actualizar</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<!--<script th:href="@{http://localhost:8080/plugins/jquery/jquery-3.5.1.min.js}"></script>-->
+<script src="https://kit.fontawesome.com/035d968a56.js" crossorigin="anonymous"></script>
+<script>
+    function clearFields(){
+        window.location = "/inicio"
+    }
+    function home(){
+        window.location ="/"
+    }
+</script>
+</body>
+</html>

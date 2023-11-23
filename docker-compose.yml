@@ -3,11 +3,15 @@ version: '1'
 services:
   api:
     container_name: inventario_api
+    image: inventario_api
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8088:8089"
+      - "9090:8088"
+    volumes:
+      - ./logs:/home/logs/
+
     depends_on:
       - db
 
@@ -23,4 +27,5 @@ services:
       - db_data:/var/lib/mysql
 
 volumes:
+
   db_data:
