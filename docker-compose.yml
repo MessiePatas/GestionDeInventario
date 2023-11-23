@@ -3,29 +3,29 @@ version: '1'
 services:
   api:
     container_name: inventario_api
-    image: inventario_api
+    image: gestiondeinventario:v1
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9090:8088"
+      - "8088:8088"
     volumes:
       - ./logs:/home/logs/
 
-    depends_on:
-      - db
-
-  db:
-    container_name: inventario_db
-    image: mysql:8.0
-    environment:
-      MYSQL_DATABASE: inventario_db
-      MYSQL_USER: usuario
-      MYSQL_PASSWORD: contraseña
-      MYSQL_ROOT_PASSWORD: contraseña_root
-    volumes:
-      - db_data:/var/lib/mysql
-
-volumes:
-
-  db_data:
+#    depends_on:
+#      - db
+#
+#  db:
+#    container_name: inventario_db
+#    image: mysql:8.0
+#    environment:
+#      MYSQL_DATABASE: inventario_db
+#      MYSQL_USER: usuario
+#      MYSQL_PASSWORD: contraseña
+#      MYSQL_ROOT_PASSWORD: contraseña_root
+#    volumes:
+#      - db_data:/var/lib/mysql
+#
+#volumes:
+#
+#  db_data:
