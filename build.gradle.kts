@@ -33,8 +33,10 @@ dependencies {
 	implementation("com.h2database:h2:2.2.220")
 	testImplementation("com.h2database:h2:2.2.224")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 //	implementation("org.mindrot.bcrypt:bcrypt:0.3")
+
 
 
 
