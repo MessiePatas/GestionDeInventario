@@ -123,8 +123,8 @@
                         <td>[[${producto.cantidad}]]</td>
                         <td>[[${producto.categoria}]]</td>
                         <td>
-                            <a th:href="@{'http://localhost:8088/api/producto/editar/' + ${producto.id}}">Edit</a>
-                            <a th:href="@{'http://localhost:8088/api/producto/eliminar/' + ${producto.id}}" th:method="delete">Delete</a>
+                            <button class="btn btn-secondary mb-2" th:href="@{'http://localhost:8088/api/producto/editar/' + ${producto.id}}">Edit</button>
+                            <button class="btn btn-danger mb-2" th:href="@{'http://localhost:8088/api/producto/eliminar/' + ${producto.id}}" th:method="delete">Delete</button>
                         </td>
                     </tr>
                 </th:block>

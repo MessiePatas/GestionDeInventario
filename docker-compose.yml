@@ -3,6 +3,7 @@ version: '1'
 services:
   api:
     container_name: inventario_api
+    image: inventario_api
     build:
       context: .
       dockerfile: Dockerfile

@@ -1,6 +1,5 @@
 package co.gestor.Inventario.seguridad;
 
-import co.gestor.Inventario.seguridad.repository.AttemptsRepository;
 import co.gestor.Inventario.seguridad.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +35,7 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
     }
 
@@ -45,8 +44,7 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").authenticated()
-                .antMatchers("/api/producto/**").anonymous()
+                .antMatchers("/api/producto/**").authenticated()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin()

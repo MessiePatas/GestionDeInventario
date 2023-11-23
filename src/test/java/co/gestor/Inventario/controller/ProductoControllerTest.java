@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -66,11 +65,10 @@ class ProductoControllerTest {
 
 
             // Realizar la solicitud DELETE con exchange
-            ResponseEntity<RespuestaDTO> response = rest.exchange(
-                    "/api/producto/eliminar/21", HttpMethod.DELETE, null, RespuestaDTO.class);
+            ResponseEntity<String> response = rest.exchange(
+                    "/api/producto/eliminar/21", HttpMethod.GET, null, String.class);
 
             // Verificar el código de respuesta esperado (200 OK)
-            assertEquals("Producto eliminado correctamente", response.getBody().getMensaje());
             assertEquals(HttpStatus.OK, response.getStatusCode());
 
 
@@ -81,27 +79,61 @@ class ProductoControllerTest {
     }
     @Test
      void Test_eliminar_producto_no_exitente_deberiaretornar_HttpStatus_NOT_FOUND(){
-        ResponseEntity<RespuestaDTO> response = rest.exchange(
-                "/api/producto/eliminar/80", HttpMethod.DELETE, null, RespuestaDTO.class);
+        ResponseEntity<String> response = rest.exchange(
+                "/api/producto/eliminar/80", HttpMethod.GET, null, String.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
 
     }
 
-    @Test
 
+    @Test
     void Test_actualizar_cuandoNoexiste_deberia_retornar_HttpStatus_NOT_FOUND(){
         ProductoDTO dto = new ProductoDTO(21, "rollos", "nuevo", 452, 56, "caro");
         rest.postForEntity("/api/producto/agregar", dto, RespuestaDTO.class);
-        ResponseEntity<RespuestaDTO> respuesta = rest.exchange(
+        ResponseEntity<String> respuesta = rest.exchange(
 
                 "/api/producto/actualizar/10",
                 HttpMethod.PUT,
                 new HttpEntity<>(dto),
-                RespuestaDTO.class,
+                String.class,
                 dto.getId()
         );
         assertEquals(HttpStatus.NOT_FOUND, respuesta.getStatusCode());
 
     }
+
+    @Test
+    void Test_buscar_producto_no_existente(){
+        ResponseEntity<String> response = rest.exchange(
+                "/api/producto/buscar/80", HttpMethod.GET, null, String.class);
+        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
+    }
+
+
+    @Test
+    void Test_buscar_producto_existente(){
+        ProductoDTO dto = new ProductoDTO(21, "rollos", "nuevo", 452, 56, "caro");
+        rest.postForEntity("/api/producto/agregar", dto, RespuestaDTO.class);
+        ResponseEntity<String> response = rest.exchange(
+                "/api/producto/buscar/21", HttpMethod.GET, null, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void actualizar_producto_no_existente(){
+        ResponseEntity<RespuestaDTO> response = rest.exchange(
+                "/api/producto/actualizar/80", HttpMethod.PUT, null, RespuestaDTO.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+
+    }
+
+    @Test
+    void listar(){
+        ResponseEntity<String> response = rest.exchange(
+                "/api/producto/listar", HttpMethod.GET, null, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+
 }

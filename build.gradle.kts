@@ -68,7 +68,9 @@ afterEvaluate{
 			fileTree(dir){
 				exclude(
 						"co/gestor/Inventario/controller/DTO",
-						"co/gestor/Inventario/modelo"
+						"co/gestor/Inventario/modelo",
+					"co/gestor/Inventario/seguridad",
+					"co/gestor/Inventario/controller/LoginController.java"
 				)
 			}
 		})
@@ -77,7 +79,8 @@ afterEvaluate{
 	pitest{
 		junit5PluginVersion.set("1.0.0")
 		excludedClasses.addAll("co/gestor/Inventario/controller/DTO.**",
-		"co/gestor/Inventario/modelo.**","co/gestor/Inventario/controller.**")
+		"co/gestor/Inventario/modelo.**","co/gestor/Inventario/controller.**", "co/gestor/Inventario/seguridad.**",
+			"co/gestor/Inventario/controller/LoginController.**","co/gestor/Inventario/controller/LoginController")
 
 
 

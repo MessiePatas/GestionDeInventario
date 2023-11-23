@@ -15,7 +15,7 @@ import org.thymeleaf.context.Context;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/producto")
 @Slf4j
 public class ProductoController {
@@ -45,7 +45,6 @@ public class ProductoController {
     public ResponseEntity<RespuestaDTO> guardarProducto(@RequestBody ProductoDTO productoDTO) {
         log.info("Guardando");
         productoLogica.guardarProducto(productoDTO);
-
         return ResponseEntity.ok(new RespuestaDTO("Producto guardado correctamente"));
     }
 
@@ -68,18 +67,17 @@ public class ProductoController {
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<RespuestaDTO> actualizarProducto(@PathVariable int id, @RequestBody ProductoDTO productoDTO) {
 
-        try {
-            productoDTO.setId(id);
-            Producto productoActualizado = productoLogica.actualizarProducto(productoDTO);
-            if (productoActualizado != null) {
-                return ResponseEntity.ok(new RespuestaDTO("Producto actualizado correctamente"));
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(new RespuestaDTO("No se pudo actualizar el producto: " + e.getMessage()));
+        productoDTO.setId(id);
+        Producto productoActualizado = productoLogica.actualizarProducto(productoDTO);
+        if (productoActualizado != null) {
+            return ResponseEntity.ok(new RespuestaDTO("Producto actualizado correctamente"));
+        } else {
+            return ResponseEntity.notFound().build();
         }
+
     }
+
+
 
     @GetMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarProducto(@PathVariable int id) {
