@@ -25,13 +25,11 @@
             height: 70vh;
         }
     </style>
-    <script src="https://kit.fontawesome.com/035d968a56.js" crossorigin="anonymous"></script>
-
     <script th:inline="javascript">
-        function addProduct() {
-            // Collect form data
-            var formData = {
-                id: document.getElementById('id').value,
+        function updateProduct() {
+            var productId = document.getElementById('id').value;
+            var updatedData = {
+                // Collect updated data from your form fields
                 nombre: document.getElementById('nombre').value,
                 descripcion: document.getElementById('descripcion').value,
                 precio: document.getElementById('precio').value,
@@ -39,13 +37,12 @@
                 categoria: document.getElementById('categoria').value
             };
 
-            // Send JSON data using Fetch API
-            fetch('http://localhost:8088/api/producto/agregar', {
-                method: 'POST',
+            fetch('http://localhost:8088/api/producto/actualizar/' + productId, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(updatedData)
             })
                 .then(response => {
                     if (!response.ok) {
@@ -55,15 +52,15 @@
                 })
                 .then(data => {
                     console.log('Success:', data);
-                    // Redirect or perform other actions on success
+                    // Redirect to /api/producto/listar on success
+                    window.location.href = 'http://localhost:8088/api/producto/listar';
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    // Display an error message to the user
+                    // Display an error message to the user, e.g., using an alert
+                    alert('Error updating product. Please try again.');
                 });
         }
-    </script>
-    <script th:inline="javascript">
         function deleteProduct(productId) {
             fetch('http://localhost:8088/api/producto/eliminar/' + productId, {
                 method: 'DELETE',
@@ -88,6 +85,7 @@
                 });
         }
     </script>
+    <script src="https://kit.fontawesome.com/035d968a56.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container-fluid h-100">
@@ -125,8 +123,8 @@
                         <td>[[${producto.cantidad}]]</td>
                         <td>[[${producto.categoria}]]</td>
                         <td>
-                            <a th:href="@{'http://localhost:8088/api/producto/buscar/' + ${producto.id}}">Edit</a>
-                            <a th:href="@{'http://localhost:8088/api/producto/eliminar/' + ${producto.id}}">Delete</a>
+                            <a th:href="@{'http://localhost:8088/api/producto/editar/' + ${producto.id}}">Edit</a>
+                            <a th:href="@{'http://localhost:8088/api/producto/eliminar/' + ${producto.id}}" th:method="delete">Delete</a>
                         </td>
                     </tr>
                 </th:block>
@@ -134,36 +132,38 @@
             </table>
         </div>
         <div class="col-md-3 sidebar">
-        <form onsubmit="addProduct()">
             <h4>Detalles del Producto</h4>
+            <form th:onsubmit="updateProduct()" th:object="${producto}">
             <div class="mb-3">
                 <label for="id">ID</label>
-                <input type="text" id="id" class="form-control">
+                <input type="text" th:value="*{id}" id="id" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" class="form-control">
+                <input type="text" th:value="*{nombre}" id="nombre" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="descripcion">Descripción</label>
-                <input type="text" id="descripcion" class="form-control">
+                <input type="text" th:value="*{descripcion}" id="descripcion" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="precio">Precio</label>
-                <input type="text" id="precio" class="form-control">
+                <input type="text" th:value="*{precio}" id="precio" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="cantidad">Cantidad</label>
-                <input type="text" id="cantidad" class="form-control">
+                <input type="text" th:value="*{cantidad}" id="cantidad" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="categoria">Categoria</label>
-                <input type="text" id="categoria" class="form-control">
+                <input type="text" th:value="*{categoria}" id="categoria" class="form-control">
             </div>
             <button class="btn btn-primary mb-2"  type="submit" >
-                Agregar</button>
-        </form>
+                Actualizar</button>
+            </form>
+
         </div>
+
     </div>
 </div>
 
@@ -174,7 +174,7 @@
         window.location = "/inicio"
     }
     function home(){
-        window.location ="/api/producto/listar"
+        window.location ="/"
     }
 </script>
 </body>

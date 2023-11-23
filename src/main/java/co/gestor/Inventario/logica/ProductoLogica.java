@@ -5,6 +5,7 @@ import co.gestor.Inventario.modelo.Producto;
 import co.gestor.Inventario.repository.ProductoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,26 +15,18 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ProductoLogica implements IService {
 
     private final ProductoRepository productoRepository;
 
+    public Producto buscarProducto(int id) {
+        Optional<Producto> productoOptional = productoRepository.findById(id);
+        return productoOptional.orElse(null);
+    }
 
-    public List<ProductoDTO> listarProductos(){
-        List<Producto> listaProductos = productoRepository.findAll();
-        List<ProductoDTO> productoDTOList = new ArrayList<>();
-        for (Producto producto: listaProductos) {
-            ProductoDTO productoDTO = ProductoDTO.builder()
-                    .cantidad(producto.getCantidad())
-                    .categoria(producto.getCategoria())
-                    .descripcion(producto.getDescripcion())
-                    .id(producto.getId())
-                    .nombre(producto.getNombre())
-                    .precio(producto.getPrecio())
-                    .build();
-            productoDTOList.add(productoDTO);
-        }
-        return productoDTOList;
+    public List<Producto> listarProductos(){
+        return productoRepository.findAll();
 
 
     }
@@ -68,20 +61,19 @@ public class ProductoLogica implements IService {
             productoExistente.setCategoria(productoDTO.getCategoria());
 
 
-            Producto productoActualizado = productoRepository.save(productoExistente);
-
-            return productoActualizado;
+            return productoRepository.save(productoExistente);
         } else {
             return null;
         }
     }
 
+
     public Producto eliminarProducto(ProductoDTO productoDTO) {
         Optional<Producto> productoOptional = productoRepository.findById(productoDTO.getId());
-
         if (productoOptional.isPresent()) {
             Producto productoExistente = productoOptional.get();
             productoRepository.delete(productoExistente);
+            log.info("Producto eliminado:" + productoOptional.get().getId());
             return productoExistente;
         } else {
             return null;

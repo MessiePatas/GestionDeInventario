@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Profile("sa")
 public class Seguridad {
 
-    public class ApplicationNoSecurity {
+    public static class ApplicationNoSecurity {
         @Bean
         public WebSecurityCustomizer webSecurityCustomizer() {
             return (web) -> web.ignoring()
